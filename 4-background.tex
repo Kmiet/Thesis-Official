@@ -1,0 +1,106 @@
+
+\section{Background} \label{section:background}
+
+% WIP: W tym rozdziale opisane zostaną pojęcia ściśle powiązane z tematyką pracy. Zapoznanie się z nimi powinno ułatwić zrozumienie i analizę przygotowanego rozwiązania jak i eksperymentów. 
+
+% While both represent a group of list-based scheduling algorithms
+
+\subsection{Workflow}
+\label{subsection:Workflow}
+
+A workflow is a term used to describe a set of tasks, where some of them are dependent one on another and all need to be processed in order to produce final results.
+Each job in such pipeline requires its own input data to begin its work and returns an output, when it ends successfully.
+Furthermore, not all jobs do the same work -- they are often split by specific operations, which often allows for an easy and straightforward data parallelized job execution with ocassional synchronization \emph{(e.g. merge operation)}.    
+As tasks may not start without their input, they might need to wait for an output of other tasks, which creates a dependency relationship.
+Such pipeline can be represented in form of a \emph{Directed Acyclic Graph (DAG)}.
+The following is a formal definition of workflow by XYZ:
+
+% formal definition
+
+An example scientific workflows are Montage \cite{Montage} and SoyKB \cite{SoyKB}.
+Both of them were used in an experiment on scheduling further described in this work.
+
+
+\subsubsection{Montage}
+
+
+\subsubsection{SoyKB}
+
+
+% Kubernetes
+\subsection{Kubernetes}
+\label{subsection:Kubernetes}
+
+One of the most popular and advanced container management tools available to choose from is Kubernetes.
+Being an open-source solution easily accessible for use in all kinds of projects -- scientific, commercial or private -- and allows for writing customs extensions to adjust its functionalities to a user needs.
+
+\subsubsection{Architecture}
+
+
+\subsubsection{Deployment}
+
+
+\subsubsection{Pod}
+asd asd asd
+
+
+\subsubsection{Job}
+
+
+\subsubsection{Kube-scheduler}
+
+
+%WMS
+\subsection{Workflow Management System}
+
+asd asd asd
+
+\subsection{Hyperflow}
+
+% Workflow representation
+% \begin{lstlisting}[language=json,firstnumber=1]
+% {"menu": {
+%   "id": "file",
+%   "value": "File",
+%   "popup": {
+%     "menuitem": [
+%       {"value": "New", "onclick": "CreateNewDoc()"},
+%       {"value": "Open", "onclick": "OpenDoc()"},
+%       {"value": "Close", "onclick": "CloseDoc()"}
+%     ]
+%   }
+% }}
+% 0123456789
+% \end{lstlisting}
+
+asd asd asd
+
+
+
+% Scheduling
+\subsection{Scheduling}
+\label{section:Scheduling}
+
+asd asd asd
+
+\subsubsection{DAG Scheduling}
+
+asd asd asd
+
+\subsubsection{Cluster scheduling}
+
+asd asd asd
+
+\subsection{Cloud Computing}
+
+asd asd asd
+
+
+
+// \textbf{Do przeredagowania i uzupelnienia - struktura:}
+
+\begin{itemize}
+  \item Kubernetes (opis technologii i wyjasnienie pojec)
+  \item Scheuduling (rodzaje, podejscia i algorytmy)
+  \item Hyperflow (opis, architektura, definicja workflow)
+\end{itemize}

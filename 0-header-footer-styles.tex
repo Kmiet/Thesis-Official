@@ -1,0 +1,45 @@
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}% default is 0pt
+
+
+
+% Styl z samym numerem strony wycentrowanym w stópce
+
+\fancypagestyle{only-cfoot}{
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead{}
+\fancyfoot{
+\centering
+\thepage
+}
+% \cfoot{\thepage}
+}
+
+
+
+% Styl aplikowany jako domyślny
+ 
+\pagestyle{fancy}
+\fancyhf{}
+
+
+% Wydłuża linie w nagłówku i sópce po bokach
+
+% \fancyhfoffset[L]{1cm} % left extra length
+% \fancyhfoffset[R]{1cm} % right extra length
+
+
+
+% Header
+
+% \lhead{\nouppercase{\leftmark}}
+\lhead{\nouppercase{\rightmark}}
+% \rhead{\nouppercase{\rightmark}}
+\rhead{\textbf{\thepage}}
+
+
+
+%Footer
+
+\lfoot{K. Kmiecik \emph{Leveraging container management for scientific computing}}

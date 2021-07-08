@@ -1,0 +1,567 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1cm,includefoot]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx} \graphicspath{{./images/}}
+\usepackage{float}
+\usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{indentfirst}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{minted}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+
+\title {Selected \LaTeX\ basics}
+\author{Kamil Doległo}
+
+\newcommand{\sign}[1]{\texttt{\textbackslash{#1}}}
+\newtheorem{thm}{Theorem}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\vspace*{\fill}
+
+{\footnotesize Based on \href{https://www.youtube.com/watch?v=KpDdBsxpAw4&list=PLQTQDG8nyMPjlHdquBvv6f745YSY2Jylb}{Just Enough LaTeX to survive}}
+
+\newpage
+
+\section{Text manipulation}{alternative title}
+
+Note: \LaTeX\ commands are case-sensitive
+
+\subsection{Font size}
+
+\begin{itemize}
+    \item Normal text and {\tiny tiny text}
+    \item Normal text and {\scriptsize scriptsize text}
+    \item Normal text and {\footnotesize footnotesize text}
+    \item Normal text and {\normalsize normalsize text}
+    \item Normal text and {\large large text}
+    \item Normal text and {\Large Large text}
+    \item Normal text and {\LARGE LARGE text}
+    \item Normal text and {\huge huge text}
+    \item Normal text and {\Huge Huge text}
+\end{itemize}
+
+\subsection{Font style}
+
+\begin{itemize}
+    \item Normal text
+    \item \textbf{Bold text}
+    \item \textit{Italic text}
+    \item \underline{Underlined text}
+    \item \textbf{\textit{\underline{Bold italic underlined text}}}
+\end{itemize}
+
+Warning: default \LaTeX\ \sign{underline\string{\string}} command does not break across the lines well. If you need to underline a longer string of text, you should use the \texttt{ulem} package, which also contains \uuline{double underline} and \uwave{wavy underline}. 
+
+\subsection{Text emphasis}
+
+When using \sign{emph\string{\string}}, \LaTeX\ automatically decides how should the emphasis look, based on the context.
+
+\normalem
+
+\begin{itemize}
+    \item Regular \emph{emphasis} text
+    \item \textit{Italic \emph{emphasis} text }
+    \item \emph{Emphasised \emph{emphasis} text }
+\end{itemize}
+
+
+Warning: The \texttt{ulem} package changes the default \sign{emph\string{\string}} behaviour. You can switch back to the normal mode using \sign{normalem}.
+
+\subsection{Font families}
+
+\begin{itemize}
+    \item \textrm{Regular text}
+    \item \textsf{Sans-serif text}
+    \item \texttt{Typewriter text (monospace) <- used for code snippets}
+\end{itemize}
+
+\subsection{Text alignment}
+
+\begin{minipage}[t]{0.3\linewidth}
+    \begin{center}
+        Fully-justified
+    \end{center}
+    
+    \fbox{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+            Justified by default. The text stretches to fill the available space. The quick brown fox jumps over the lazy dog. Justified by default. The text stretches to fill the available space. The quick brown fox jumps over the lazy dog
+        \end{minipage}%
+    }%
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}[t]{0.3\linewidth}
+    \begin{center}
+        Centered
+    \end{center}
+    
+    \fbox{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+            \begin{center}
+                Centered text is aligned down the center of the page. The quick brown fox jumps over the lazy dog
+            \end{center}
+        \end{minipage}%
+    }%
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}[t]{0.3\linewidth}\vspace{0pt}%
+    \begin{center}
+        Left-justified text
+    \end{center}
+    
+    \fbox{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+            \begin{flushleft}
+                Left-justified text, aligned with the left margin. The spacing between words is not stretched out. The quick brown fox jumps over the lazy dog
+            \end{flushleft}
+        \end{minipage}%
+    }%
+\end{minipage}
+\hspace*{\fill}
+\begin{minipage}[t]{0.3\linewidth}\vspace{0pt}%
+    \begin{center}
+        Right-justified text
+    \end{center}
+    
+    \fbox{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+            \begin{flushright}
+                Right-justified text, aligned with the right margin. The spacing between words is not stretched out. The quick brown fox jumps over the lazy dog
+            \end{flushright}
+        \end{minipage}%
+    }%
+\end{minipage}
+
+\subsection{Paragraph indentation}
+
+\LaTeX\ automatically indents new paragraphs. New paragraphs happen when you have a blank
+line of code in your document. 
+
+If you wanted to skip the indentation of a particular paragraph,
+you can use the \sign{noindent} command at the beginning of that paragraph. 
+
+\noindent If you wanted to change the indentation of the entire file, you would need to modify the indent size either in the preamble or at the beginning of the document. Here’s how that command looks for a 1 cm indentation:
+\sign{setlength\string{\textbackslash parindent\string}\string{1cm\string}}.
+
+\subsection{Spacing}
+
+\begin{itemize}[leftmargin=*]
+    \item Non-breaking spaces are inserted with the tilde \texttt{\~} symbol. A good use-case is referencing a figure, eg. Table~\ref{tab:my_label}.
+    \item To help \LaTeX\ with breaking long words, a hyphen \sign{-} can be used.
+    \item \LaTeX automatically puts a larger space after every period, treating it like the end of a sentence. \sign{ } (backslash space) can be put immediately after the period to get a regular space:
+
+\makebox[\dimexpr\textwidth-\leftmargin][c]{
+\begin{minipage}[t]{0.2\linewidth}%
+    \begin{center}
+        \texttt{See pp. 1-25 of Dr. Frankenstein's notebook}
+    \end{center}
+    
+    \fbox{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+            See pp. 1-25 of Dr. Frankenstein's notebook
+        \end{minipage}%
+    }%
+\end{minipage}
+\hspace*{0.2\linewidth}
+\begin{minipage}[t]{0.2\linewidth}%
+    \begin{center}
+        \texttt{See pp.\string\ 1-25 of Dr.\string\ Frankenstein's notebook}
+    \end{center}
+    
+    \fbox{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+            See pp.\ 1-25 of Dr.\ Frankenstein's notebook
+        \end{minipage}%
+    }%
+\end{minipage}
+}
+
+\item Horizontal spaces \underline{\hspace{2cm}}: \(x=42 \text{\hspace{1cm} and \hspace{1cm}} y=42\)
+
+\item Vertical spaces are constructed with \sign{vspace\string{length\string}} command. A common use case is eg.\ after an \sign{end\string{center\string}} environment.
+
+\item Phantom characters are invisible text characters: 
+
+\begin{tabular}{ll}
+     Saturday at 10 AM & Breakfast \\
+     \phantom{Saturday at} 1 PM & Lunch \\
+     Sunday at 8 AM & Breakfast \\
+     \phantom{Sunday at} 11 AM & Brunch \\
+\end{tabular}
+
+\item \sign{quad} - space equal to the current font size (= 18 mu)
+\item \sign{,} - $\frac{3}{18}$ of \sign{quad} (= 3 mu)
+\item \sign{:} - $\frac{4}{18}$ of \sign{quad} (= 4 mu)
+\item \sign{;} - $\frac{5}{18}$ of \sign{quad} (= 5 mu)
+\item \sign{!} - $\frac{-3}{18}$ of \sign{quad} (= -3 mu)
+\item \sign{ }(space after backslash) - equivalent of space in normal text
+\item \sign{qquad} - twice of \sign{quad} (= 36 mu)
+\end{itemize}
+
+
+\section{Basic math}
+
+\subsection{Math modes}
+
+\LaTeX provides two math modes: 
+
+\begin{itemize}
+    \item display style math
+    \item inline style math
+\end{itemize}
+
+Display style math puts math equations on display:
+
+$$
+\sum_{n=1}^\infty \frac{1}{n} = \infty
+$$
+
+Inline style math allows for writing math equations like $\sum_{n=1}^\infty \frac{1}{n} = \infty$ in line with the surrounding text. 
+
+\begin{center}
+    \fbox{%
+    \begin{minipage}{0.6\linewidth}%
+        Important note: whenever describing a mathematical variable, you should use inline math mode, for example: the variable $x$ looks different from the letter x.
+    \end{minipage}
+    }
+\end{center}
+
+Notice the differences between the display style mode and the inline style mode. Display style can be forced in the inline mode using the \sign{displaystyle} command: \( \displaystyle \sum_{n=1}^\infty \frac{1}{n} = \infty \), however the spacing may get odd. You can also force the inline style in the display mode using the \sign{textstyle} command:
+
+$$
+\textstyle
+\sum_{n=1}^\infty \frac{1}{n} = \infty
+$$
+
+\subsection{Multi-line equations}
+
+Multi-line equations can be written using the \texttt{align*} environment: 
+
+\begin{align*}
+    f(x) & = a_2x^2 + a_1x+ a_0 \\
+         & = x^2 + x
+\end{align*}
+
+where \texttt{\&} denotes the alignment point. There is also an \texttt{align} environment (without star) where each equation is numbered. We can skip the numbering with the \sign{nonumber} command:
+
+\begin{align}
+    f(x) & = a_2x^2 + a_1x+ a_0 \\
+         & = x^2 + x \nonumber
+\end{align}
+
+\subsection{Text}
+
+Text in math mode can be used with \sign{text\string{\string}} command: 
+$$
+n = ab \text{ where $a$ and $b$ are natural numbers}
+$$
+
+
+By default, parentheses are not easy to read: 
+$$
+(\sum_{n=1}^\infty (\frac{1}{a+b})^2)^2
+$$
+
+This can be fixed automatically using \sign{left(} and \sign{right)} commands:
+
+$$
+\left(\sum_{n=1}^\infty \left(\frac{1}{a+b}\right)^2\right)^2
+$$
+
+\subsection{Miscellaneous}
+
+\texttt{amssymb} package contains the blackboard font: 
+$\mathbb{N}, \mathbb{R}, \mathbb{Z}$
+
+Funny thing: n-th roots are constructed with the \sign{sqrt[n]\string{\string}} command: $\sqrt[3]{64}$ 
+
+For the math symbols reference, detexify\footnote{\href{https://detexify.kirelabs.org/classify.html}{https://detexify.kirelabs.org/classify.html}} can be used
+
+\section{Tables and arrays}
+
+\subsection{In-text tables}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c||r|}
+        \hline
+        Left-justified text & Centered text & Right-justified text  \\
+        \hline
+        l & c & r \\
+        \hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+For better control over the horizontal lines use the \texttt{hhline} package.
+There is a \texttt{booktabs} package with commands to make tables more attractive, \texttt{tabularx} for controlling the width of the columns, \texttt{colortbl} for coloring the tables, and \texttt{longtable} for tables that span across multiple pages.
+
+\subsection{Math arrays}
+
+$$
+\begin{array}{c|c c}
+    a_1 & a_2 & a_3  \\
+    \hline
+    a_{11} & a_{12} & a_{13}  
+\end{array}
+$$
+
+The common use for arrays is to create matrices manually:
+
+$$
+\left(
+\begin{array}{ccc}
+    a_1 & a_2 & a_3  \\
+    a_{11} & a_{12} & a_{13}  
+\end{array}\right)
+\\
+\left[
+\begin{array}{ccc}
+    b_1 & b_2 & b_3  \\
+    b_{11} & b_{12} & b_{13}  
+\end{array}\right]
+$$
+
+You can also use environments from the \texttt{amsmath} package (which also have smaller spacing):
+
+$$
+\begin{pmatrix}
+    a_1 & a_2 & a_3 & \hdots & a_n \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a_{11} & a_{12} & a_{13} & \hdots & a_{nm}
+\end{pmatrix}
+\\
+\begin{bmatrix}
+    b_1 & b_2 & b_3  \\
+    b_{11} & b_{12} & b_{13}  
+\end{bmatrix}
+$$
+\pagebreak 
+
+\subsection{Merging rows and columns}
+
+For merging columns there is a command called \sign{multicolumn\string{num\_cols\string}\string{alignment\string}\string{contents\string}}:
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Very long text & Very long text & Very long text \\
+        \hline
+        \multicolumn{3}{|c|}{Center merged} \\
+        \hline
+        Text & \multicolumn{2}{|l|}{Left-aligned multicolumn} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+For merging rows, the \texttt{multirow} package contains the \sign{multirow[valign]\string{num\_rows\string}\string{width\string}\string{contents\string}} command:
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \multirow{2}{*}{Row merge} & Very long text & Very long text \\
+        \hhline{|~|--|}
+        & \multicolumn{2}{|r|}{Right-aligned multicolumn} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{Basic customization}
+
+Package \texttt{pdflscape} provides the \texttt{landscape} environment for a landscape page in a portrait document.
+
+Package \texttt{fancyhdr} provides header and footer customization
+
+\subsection{Page breaks}
+
+When forcing page breaks, either \sign{pagebreak} or \sign{newpage} command can be used. \sign{pagebreak} stretches the text to fill the page ("soft" page break), while \sign{newpage} pushes the whitespace to the bottom ("hard" page break) 
+
+\subsection{User-defined commands}
+
+\sign{newcommand\string{\textbackslash command\_name\string}\string{definition\string}}, eg. \sign{newcommand\string{\textbackslash ZZ\string}\string{\textbackslash mathbb\string{Z\string}\string}}:
+\newcommand{\ZZ}{\mathbb{Z}}
+
+$\text{\textbackslash ZZ} \rightarrow \ZZ$
+
+\section{Environments}
+
+\subsection{Ordered lists}
+
+\begin{enumerate}
+    \item First item
+    \item Second item
+    \begin{enumerate}
+        \item First sub-item
+        \item Second sub-item
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Unordered lists}
+
+\begin{itemize}
+    \item First item
+    \item Second item
+    \begin{itemize}
+        \item[$\rightarrow$] First sub-item
+        \item[] Second sub-item
+    \end{itemize}
+\end{itemize}
+
+There is a \texttt{enumitem} package for fine customization of list items 
+
+\subsection{Theorems}
+
+\begin{thm}
+    Package \texttt{amsthm} provides theorem as well as proof environments
+\end{thm}
+
+\begin{proof}
+This is a proof.
+\end{proof}
+
+\section{Miscellaneous}
+
+\subsection{Links}
+Package \texttt{hyperref} provides links. Table of contents as well as all \sign{ref\string{\string}} commands will become hyperlinks. You can use \sign{hyperref[label]\string{Link text\string}} for custom references: \hyperref[tab:my_label]{Custom table name}
+
+\subsection{Images}
+
+There is a \texttt{subcaption} package for subfigures. \sign{DeclareGraphicsExtensions\string{formats\string}} allows to declare the order of loading images.    
+
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{grogu}
+\caption{Grogu}
+\label{fig:grogu1}
+\end{subfigure}
+\begin{subfigure}{\dimexpr0.5\textwidth-\leftmargin}
+\centering
+\includegraphics[width=0.9\linewidth,angle=-90]{grogu}
+\caption{Also Grogu}
+\label{fig:grogu2}
+\end{subfigure}
+
+\caption{Caption for this figure with two images}
+\label{fig:grogu}
+\end{figure}
+
+There exists a \texttt{wrapfig} package for wrapping text around images (it has some problems from time to time though) and \texttt{wraptable} package for wrapping wrapping text around tables.
+\vspace{1ex}
+
+A long time ago, in a galaxy far, far, away...
+
+It is a dark time for the Rebellion. Although the Death Star has
+been destroyed, Imperial troops have driven the Rebel forces from
+their hidden base and pursued them across the galaxy.
+Evading the dreaded Imperial Starfleet, a group of freedom fighters
+led by Luke Skywalker has established a new secret base on the remote
+ice world of Hoth.
+\begin{wrapfigure}{l}{0.25\textwidth}
+\centering
+\includegraphics[width=0.5\linewidth]{empire} 
+\caption{Empire}
+\label{fig:wrapfig}
+\end{wrapfigure}
+The evil lord Darth Vader, obsessed with finding young Skywalker,
+has dispatched thousands of remote probes into the far reaches of
+space...
+
+EXTERIOR: GALAXY -- PLANET HOTH
+
+A Star Destroyer moves through space, releasing Imperial probe
+robots from its underside. 
+One of these probes zooms toward the planet Hoth and lands
+on its ice-covered surface. An explosion marks the point of
+impact. 
+
+EXTERIOR: HOTH -- METEORITE CRATER -- SNOW PLAIN -- DAY
+
+A weird mechanical sound rises above the whining of the
+wind. A strange probe robot, with several extended sensors,
+emerges from the smoke-shrouded crater. The ominous mechanical
+probe floats across the snow plain and disappears into the
+distance.
+
+
+\subsection{Float placement}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{l|X}
+    \textbf{Parameter} & \textbf{Position} \\
+    \hline
+    h & Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot) \\
+    \hline
+    t & Position at the top of the page \\
+    \hline
+    b & Position at the bottom of the page \\
+    \hline
+    p & Put on a special page for floats only \\
+    \hline
+    ! & Override internal parameters LaTeX uses for determining "good" float positions \\
+    \hline
+    H & Places the float at precisely the location in the LATEX code. Requires the \texttt{float} package, though may cause problems occasionally. This is somewhat equivalent to h!\\
+\end{tabularx}
+\caption{Different float placement options}
+\label{tab:float_placement}
+\end{table}
+
+\section{Code listings}
+
+There is a \texttt{minted} package, which provides syntax highlighting out of the box. You can use it inline (\mintinline{python}|import this|), as well as in the display mode:
+
+\begin{listing}[H]
+\begin{minted}[linenos]{python}
+class Movie(object):
+    def __init__(self, width=80, height=24):
+        """
+        A Movie object consists of frames and is empty by default.
+        Movies are loaded from text files.
+        A movie only can be loaded once. A second try will fail.
+        Args:
+            width (int): Movie screen width.
+            height (int): Movie screen height
+        """
+        self.frames = []
+        self._loaded = False
+
+        self._frame_width = 67
+        self._frame_height = 13
+
+        f = Frame()
+        f.data.append("No movie yet loaded.")
+        self.frames.append(f)
+
+        self.screen_width = width
+        self.screen_height = height
+
+        self.left_margin = (self.screen_width - self._frame_width) // 2
+        self.top_margin = (self.screen_height - self._frame_height - TimeBar.height) // 2
+    
+\end{minted}
+\caption{Python code example}
+\end{listing}
+
+\end{document}

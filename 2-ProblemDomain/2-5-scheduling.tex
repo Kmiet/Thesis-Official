@@ -1,0 +1,72 @@
+\subsection{Scheduling}
+\label{s:ProblemDomain:Scheduling}
+
+The \emph{scheduling problem} is a term referring to a process of arranging tasks and assigning them to selected processing units with goal of workload optimization, e.g. minimize completion time.
+To provide a sub-optimal solutions to this NP-complete problem many heuristics have been researched and developed with two main approaches considered -- \emph{static} and \emph{dynamic} scheduling.
+The final solutions can be \emph{workflow-aware} which means they take the dag-oriented structure of the workload into consideration during task arrangement.
+
+
+\subsubsection{Static scheduling}
+\label{s:ProblemDomain:StaticSched}
+
+In static scheduling, it is assumed that all requirements are already defined, including task resource demands and information about execution environment with underlying infrastructure.
+This approach allows to optimize the workload distribution across all of the computing units.
+At the same time it lacks the adaptability to unforeseen changes in resource availability. 
+
+
+There are multiple categories of static scheduling algorithms, one of them being a \emph{list-based} ones.
+The \emph{list-based} algorithms consist of two phases:
+
+
+\begin{itemize}
+  \item{
+\emph{prioritization} -- during this phase each task has its the \emph{rank} value calculated and has its priority based off of it. The tasks are then ordered descendingly by their priorities
+};
+  \item{
+\emph{selection} -- in this stage the final sequences of tasks are formed, one for each available computing unit. A sequence binds the tasks to a selected processor and defines their execution execution order that must be followed.
+}
+\end{itemize}
+
+
+An example of list-based workflow scheduling algorithm is \emph{Heterogeneous Earliest Finish Time (HEFT)}, where the rank of a task is based on the its computation and communication costs \cite{b:HEFT}.
+Another algorithm worth mentioning is a \emph{Predict Earliest Finish Time (PEFT)}.
+Despite both algorithms using same parameters in rank calculation process, they have different formulas defined.
+The difference comes from PEFT's \emph{Optimistic Cost Table (OCT)} which is used to evaluate the future impact of assigning a given task to specific node \cite{b:PEFT}. \todo{ Może wspomnieć o wynikach porownania PEFT do HEFT z \cite{b:PEFT} ?}
+
+
+
+\subsubsection{Dynamic scheduling}
+\label{s:ProblemDomain:DynamicSched}
+
+The dynamic approach to scheduling problem concentrates more on an issue of changeability of computing environment, availability of its resources and changes to processors load.
+All scheduler's decisions are being made at runtime based on information know only at the exact moment in time.
+This makes them more adaptable, but at the same time there is a disadvantage of worse workload optimization than with static scheduling \cite{b:Dynamic-Scheduling-Case-Study}.
+Additionally, the dynamic nature makes it a go-to approach for cluster schedulers \cite{b:Tetris, b:Graphene}.
+
+
+
+\subsubsection{Task clustering}
+\label{s:ProblemDomain:TaskClustering}
+
+Executing a lot of short tasks in a single limited computing environment leads to increase in slowdown and decrease in overall resource utilization.
+To address this problem the \emph{task clustering} solutions are used.
+The idea behind them is to group the waiting tasks into the multi-element clusters and treat them as a single entity \cite{b:Task-Clustering-Pegasus} during the scheduling process.
+
+There are various approaches to clustering tasks in a workflow.
+The ones related to granularity problem are:
+
+
+\begin{itemize}
+  \item{
+\emph{horizontal} -- also called a \emph{level-based}, is a clustering solution that forms groups based on the task level of in workflow's DAG representation. In horizontal approach clusters can be composed of entities with the same level
+};
+\item{
+\emph{vertical} -- tasks are grouped only vertically with the child tasks dependent on them or the parent tasks they are dependant on. The problem with vertical clustering is the task resource requirements in the same cluster may differ
+};
+  \item{
+\emph{label-based} -- in this approach all tasks are being labeled by the end user and grouped with other ones that have the same label. Then all the tasks within a single cluster have to be ordered for an execution \cite{b:Task-Clustering-Hybrid-Algorithm, b:Task-Clustering-Pegasus}.
+}
+\end{itemize}
+
+
+% Moze przeniesc do osobnej subsection, niekoniecznie zwiazany z schedulingiem ?

@@ -1,0 +1,14 @@
+To this day a scheduling problem had been researched in many ways, from presenting a new algorithms ideas and propositions, to experimental measurements of performance impact in various systems and scenarios.
+In terms of algorithms, they can be classified by different features to separate groups.
+
+In static scheduling, it is assumed that all scheduling requirements for task execution are predefined.
+With that a scheduler can make all decisions at the application's compile-time or, to be more precise, before the pipeline start.
+Such concept is a base for a \textit{Heterogeneous Earliest Finish Time (HEFT)} \cite{HEFT} and \textit{Predict Earliest Finish Time (PEFT)} \cite{PEFT} algorithms, which main goal is to provide the most optimal plan for workflow execution with quickest completion time.
+
+Presented in 2002 by H. Topcuoglu, S. Hariri and M. Y. Wu - HEFT \cite{HEFT} is known for its stable performance for scheduling various workflows. As any other list-based algorithm, this one also could be divided into two phases. In the first one, prioritization phase, it assigns priorities to tasks based on their computation requirements and orders them by their priority descendingly. The second phase is a selection phase, in which tasks are being associated with processors they are going to be ran on and thus the whole execution flow is being planned. It also has defined policies for a situations where multiple tasks have the same priority.
+
+Another interesting algorithm for static scheduling is PEFT \cite{PEFT} - presented by H. Arabnejad and J. G. Barbosa. Being a list-based algorithm, the key differences between this one and the others is the cost calculation method. In PEFT \cite{PEFT} a novel approach to cost calculation had been introduced. With \textit{Optimistic Cost Table (OCT)} \cite{PEFT}, despite completly ignoring the processor availability, they managed to achieve even better results in their experiments than with HEFT \cite{HEFT}.
+
+On the contrary, dynamic scheduling allows changing the requirements in real-time and scheduler is expected to update the execution priorities on the fly.
+This concept is utilized by \textit{Minimum Cost Maximum Flow (MCMF)} \cite{MCMF} algorithm presented by M. Hadji and D. Zeghlache.
+Their take on the MCMF approach was to introduce a Bin-Packing based algorithm, that would allow a dynamic decision making for resource allocation.

@@ -1,0 +1,38 @@
+\subsection{Cloud computing}
+\label{s:ProblemDomain:Cloud}
+
+The term \emph{cloud computing} is used to describe a group of services with elastic pool of resources available to the end users \emph{on-demand} and settleable based on their usage quota \emph{(pay-as-you-go)} \cite{b:Cloud-Principles-Paradigms}.
+In order to distinguish different cloud services they are often classified by their abstraction level as specific service models with the three main being:
+
+\begin{itemize}
+  \item{
+\emph{Software as a Service (SaaS)} -- the primary resources are provider's applications that run and are managed, transparently to the user
+};
+  \item{
+\emph{Platform as a Service (PaaS)} -- enables deployment of users applications on computing units which abstracts actual physical resources from user, preventing any interaction with underlying infrastructure
+};
+  \item{
+\emph{Infrastructure as a Service (IaaS)} -- a model where users have to configure and manage the infrastructure by themselves, where the base resources are e.g. virtual machines, data storage and network components.
+}
+\end{itemize}
+The abstraction level of a service is related to the number of intermediary layers between the final resource and physical infrastructure.
+
+
+
+\subsubsection{Container as a Service}
+\label{s:ProblemDomain:CaaS}
+
+Another model of cloud services available in today's clouds is \emph{Container as a Service (CaaS)}.
+Relating it to other service models it is classified as one in between of the IaaS and PaaS \cite{b:IBM-CaaS}.
+With containers being treated as a primary resource it enables interaction with infrastructure at a higher abstraction level than in IaaS, nonetheless the responsibility for the management process still lies in hands of the end user.
+This model offers a more scalable and portable solution to infrastructure management for containerized environments.
+
+
+
+\subsubsection{Elastic Kubernetes Service}
+\label{s:ProblemDomain:EKS}
+
+An example of an CaaS service is \emph{Elastic Kubernetes Service (EKS)} \cite{b:IBM-CaaS} provided by \emph{Amazon Web Services (AWS)}.
+It allows configuration of fully-managed Kubernetes cluster \cite{b:AWS-EKS} in AWS cloud environment.
+This means that EKS by itself spans a new cluster, covers the Kubernetes installation process and is responsible for maintaining the Kubernetes control plane outside the cluster's nodes.
+The end user is only responsible for initial cluster configuration and requesting workloads on the cluster with Kubernetes API.
