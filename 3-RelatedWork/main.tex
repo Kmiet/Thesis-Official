@@ -1,8 +1,8 @@
 \thispagestyle{only-cfoot}
 \section{Related work}\label{s:RelatedWork}
 
-This chapter introduces a selected works related to the problem of this thesis and provides a review of them.
-To address non-uniformity of the problem, introduction are split into two separate research areas.
+This chapter presents a few selected works related to the problem of this thesis and provides a review of them.
+To address non-uniformity of the problem, works from two separate research areas are included.
 
 % As the research problem thesis' problem 
 % To address this non-uniformity this chapter presents related works in both research areas.
@@ -11,24 +11,24 @@ To address non-uniformity of the problem, introduction are split into two separa
 
 \subsection{Workflow-aware cluster schedulers}\label{s:RelatedWork:Schedulers}
 
-The goal of cluster scheduling is to optimize allocation of tasks to available computing resources.
-There are a few challenges the scheduler may focus on dealing with such as cost minimization, load-balancing or fairness.
+The goal of cluster scheduling is to optimize the allocation of tasks to available computing resources.
+There are a few challenges the scheduler may focus on dealing with, such as cost minimization, load-balancing, or fairness.
 To successfully schedule DAG-based workloads in cluster environments, schedulers need to be workflow-aware.
 
 
 One of such schedulers is \emph{Graphene} proposed in \cite{b:Graphene}.
-It introduces a two-step approach to scheduling workflows based on identification of so-called \emph{troublesome tasks} and planning workload execution around them.
-First, the tasks are being ordered then packed and allocated onto selected, best-fitting cluster resources.
+It introduces a two-step approach to scheduling workflows based on the identification of so-called \emph{troublesome tasks} and planning workload execution around them.
+First, the tasks are being ordered and then packed and allocated to selected best-fitting cluster resources.
 Evaluation of the concept was conducted against other production-grade solutions (e.g. \emph{Apache TEZ}\footnotemark[1]  with \emph{Capacity Scheduler}\footnotemark[2]) on existing DAG-based application workloads \cite{b:Graphene}.
-The presented results are remarkable, especially the considerable Makespan reduction.
-Unfortunately the outcomes are achieved at the cost of solution's complexity.
-Neither Graphene nor the idea for two-phase scheduling of scientific workflows was adopted and evaluated in Kubernetes environment, to our \todo{my?} best knowledge.
+The presented results are remarkable, especially the considerable makespan reduction.
+Unfortunately, the outcomes are achieved at the cost of the solution's complexity.
+Neither Graphene nor the idea of two-phase scheduling of scientific workflows was adopted and evaluated in Kubernetes environment, to our best knowledge.
 
 
-Another solution to cluster scheduling is \emph{Tetris} -- a scheduler which uses a greedy approach with multi-dimensional packing for its decision making process \cite{b:Tetris}.
-To support DAG-based workloads the adjusted version of \emph{Shortest Remaining Time First (SRTF)} algorithm was introduced and integrated with packing solution.
-Proposed concept was evaluated against both \emph{Capacity Scheduler}\footnotemark[2] and \emph{Fair Scheduler}\footnotemark[3] in a simulation with a custom created workloads.
-Although the declared results lead to impressive reduction in job Makespan, in \cite{b:Graphene} it is claimed that Tetris does not perform well enough when scheduling DAG-structured workflows.
+Another solution to cluster scheduling is \emph{Tetris} -- a scheduler which uses a greedy approach with multidimensional packing for its decision making process \cite{b:Tetris}.
+To support DAG-based workloads, the adjusted version of \emph{Shortest Remaining Time First (SRTF)} algorithm was introduced and integrated with the packing solution.
+The proposed concept was evaluated against both \emph{Capacity Scheduler}\footnotemark[2] and \emph{Fair Scheduler}\footnotemark[3] in a simulation with custom created workloads.
+Although the declared results lead to an impressive reduction in job makespan, in \cite{b:Graphene} it is claimed that Tetris does not perform well enough when scheduling DAG-structured workflows.
 % Lastly, the soulution was not evaluated as a Kubernetes scheduler.
 
 %%
@@ -42,15 +42,15 @@ Although the declared results lead to impressive reduction in job Makespan, in \
 %%%%%%%%
 \subsection{Scheduling performance comparison}\label{s:RelatedWork:Performance}
 
-One of the goals of this work is analysis and juxtaposition of different workflow scheduling approaches.
-This includes comparison of various algorithms in specific computing environments.
+One of the goals of this work is the analysis and juxtaposition of different workflow scheduling approaches.
+This includes a comparison of various algorithms in specific computing environments.
 
-The studies of \cite{b:Performance-Analysis-Scheduling-DAG} and  \cite{b:Performance-Comparison-Scheduling-DAG} describe such comparison processes, achieved with simulations ran on random generated DAG-based workloads.
-None of them present information about underlying infrastructure in detail, the only detail provided is the number of processing units used.
-In each work an analysis was conducted for a different set of state-of-the-art, list-based workflow scheduling algorithms, however all of them included HEFT and PEFT.
-To evaluate the solutions a few different and important metrics were used, such as SLR, Speedup and Efficiency.
+The studies of \cite{b:Performance-Analysis-Scheduling-DAG} and  \cite{b:Performance-Comparison-Scheduling-DAG} describe such comparison processes, achieved with simulations run on randomly generated DAG-based workloads.
+None of them present information about the underlying infrastructure in detail, the only detail provided is the number of processing units used.
+In each work, an analysis was conducted for a different set of state-of-the-art, list-based workflow scheduling algorithms, however, all of them included HEFT and PEFT.
+To evaluate the solutions, a few different and important metrics were used, such as schedule length ratio, speedup, and efficiency.
 Unfortunately, in both \cite{b:Performance-Analysis-Scheduling-DAG} and \cite{b:Performance-Comparison-Scheduling-DAG} no information was provided about Makespan comparison to evaluate job completion optimization capabilities.
-Results from all the mentioned works show that PEFT is one of the best available solutions, outperforming other algorithms for most of the covered scheduling criteria.
+Results from all mentioned works show that PEFT is one of the best available solutions, outperforming other algorithms for most of the covered scheduling criteria.
 
 
 
@@ -59,7 +59,7 @@ Results from all the mentioned works show that PEFT is one of the best available
 
 None of the reviewed works had conducted an evaluation in Kubernetes cluster which is one of the main goals of this thesis.
 Additionally, other than the Graphene scheduler, there is no solution fully addressing the workflow scheduling problem for containerized clusters that achieves good enough results. 
-Due to the time constraints on this work it is impossible to reproduce the same scheduling behaviour as in Graphene and use as solution for the experiments.
-The algorithm comparisons related works lack the data and analysis of the job completion times achieved by evaluated solutions.
+Due to the time constraints of this work, it is impossible to reproduce the same scheduling behaviour as in Graphene and use it as a solution for the experiments.
+The algorithm comparison related works lack the data and analysis of the job completion times achieved by the evaluated solutions.
 
 

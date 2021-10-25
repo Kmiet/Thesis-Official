@@ -1,10 +1,20 @@
 %&pdflatex
 
-\documentclass[12pt, twoside]{article}
+% \documentclass[12pt, twoside]{article}
+\documentclass[12pt]{article}
 
+\usepackage{multirow}
+\usepackage{mathptmx} % Times New Roman like font
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{amsmath} % for implementation of the matrix environment
+\usepackage{listings}
+% \numberwithin{figure}{subsection}
+% \numberwithin{table}{}
+\numberwithin{equation}{section}
+
+\usepackage{enumitem}
+\usepackage{listings}
 \usepackage{blindtext}
 \usepackage{caption}
 \usepackage{color}
@@ -15,17 +25,18 @@
 \usepackage[shellescape,latex]{gmp} % metapost for UMLs
 \usepackage[hidelinks]{hyperref} % ToC/LoA/LoF/LoT entries are links
 
-% Figure X instead of X.
+% fig. X instead of X when using \cref
+% \usepackage[nameinlink]{cleveref}
+\usepackage[capitalise]{cleveref}
+%
+
+%% Figure X instead of X.
 % \makeatletter
 % \renewcommand{\p@figure}{\figurename\ }
 % \makeatother
 %
 
-% fig. X instead of X when using \cref
-\usepackage[nameinlink]{cleveref}
-%
 
-\usepackage{mathptmx} % Times New Roman like font
 \usepackage{pdfpages} % for inserting pdf as the initial pages
 \usepackage{setspace} \onehalfspacing % 1.5 line spacing
 \usepackage{subcaption}
@@ -39,8 +50,13 @@
 \makeatother
 %
 
+
+
 \titlelabel{\thetitle.\quad}
 \usepackage[a4paper, width=150mm, top=30mm, bottom=30mm]{geometry}
+% \usepackage[a4paper, width=160mm, top=30mm, bottom=30mm]{geometry}
+%%% Page width 
+
 
 % Styles for captions
 \captionsetup[figure]{labelfont={bf}, textfont={small}}
@@ -71,7 +87,7 @@
 
 
 % INITIAL PAGES
-\includepdf[pages={-, {}}]{initial-pages-v4.pdf} % `-' for all pages, `{}' for an empty page
+\includepdf[pages={-, {}}]{initial-pages-v5-final.pdf} % `-' for all pages, `{}' for an empty page
 % \includepdf[pages={-, {}}]{initial-pages-v2.pdf}
 
 
@@ -84,11 +100,11 @@
 
 
 %%% ACKNOWLEDGMENTS
-% \include{0-acknowledgments}
+\include{0-acknowledgments}
 
 %%%
 
-
+\setcounter{page}{1}
 %%% TOC
 \tableofcontents
 \thispagestyle{empty} % style for table of contents
@@ -103,7 +119,6 @@
 \include{1-Introduction/main}
 \include{2-ProblemDomain/main}
 \include{3-RelatedWork/main}
-% \include{3-methodology}
 \include{4-Solution/main}
 \include{5-ExperimentSetup/main}
 \include{6-Evaluation/main}
@@ -140,7 +155,7 @@
 
 
 %%% BIBLIOGRAPHY
-\nocite{*} % forces bibtex to include all citations, whether or not they were referred to in the paper
+% \nocite{*} % forces bibtex to include all citations, whether or not they were referred to in the paper
 
 \thispagestyle{only-cfoot}
 % \cleardoublepage

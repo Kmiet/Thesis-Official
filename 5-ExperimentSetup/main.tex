@@ -1,13 +1,19 @@
 \thispagestyle{only-cfoot}
 \section{Experiment setup}\label{s:ExperimentSetup}
 
-\todo{Write a section outline}
+% \todo{Write a chapter outline}
+
 % Comparative experiment
 
 % Agglomeration config, algorithm inputs ?
 
-\subsection{Environment}\label{s:ExperimentSetup:Environment}
+% leverage containerization to resource usage optimization -> 0.5cpu -> do porowniania wynikow schedulingu z optymalnym wykorzystaniem
 
+This chapter describes in detail the experimental environment, its configuration, and setup process -- including the input for the algorithms run by the static scheduler.
+The metrics used for evaluation are also introduced along with the reasons for their exploitation.
 
+\input{5-ExperimentSetup/5-1-environment}
 
-\subsection{Metrics}\label{s:ExperimentSetup:Metrics}
+\input{5-ExperimentSetup/5-2-algorithm-input}
+
+\input{5-ExperimentSetup/5-3-metrics}

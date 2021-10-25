@@ -1,0 +1,71 @@
+%%%%
+\subsection{Metrics}\label{s:ExperimentSetup:Metrics}
+
+% \todo{opisać dokładniej wykorzystane metryki, załączyć wzory}
+
+% list and explain all available operators T_arrival etc.
+To evaluate and compare the performance of the applied scheduling approaches, four metrics were selected.
+Each of them offers an insight on some aspect of the evaluated solution and allows analysis from different perspectives.
+The data used for metric calculation comes from experiment logs and mostly consists of the resource usage values and timestamps for various events fired for each task in the workflow.
+
+% \todo{Wyniki wyliczone skryptem XYZ i znajduja sie pod URL...}
+
+\begin{center}
+\medskip
+\begin{minipage}{0.8\textwidth}
+% \small
+$J $ -- a set of jobs that belong to the given workflow \\
+\smallskip
+$CP$ -- a set of jobs that form a \emph{Critical Path} in a workflow graph \\
+\smallskip
+$W_{start}, W_{finish}$ -- times of a workflow start and finish, respectively \\
+\smallskip
+$T_{start}^j, T_{finish}^j$ -- times of a \emph{j} job start and finish, respectively \\
+\smallskip
+$T_{arrival}^j$ -- time when a \emph{j} job becomes executable, but is not yet scheduled \\
+\smallskip
+$T_{exec}^j$ -- execution time of a \emph{j} job, excluding containerization.
+
+\end{minipage}
+\medskip
+\end{center}
+
+
+
+The first metric, \emph{Makespan}, is one of the most common and most relevant representations of workflow execution performance.
+It shows how much time, in seconds, is needed to complete all workflow tasks from the time it has started:
+
+\begin{align}
+Makespan = W_{finish} - W_{start}
+.
+\end{align}
+
+
+Another metric used in the evaluation is \emph{Slowdown}.
+Slowdown provides an insight on the scheduling strategy used in a selected approach, whether the execution of freshly available tasks or longer waiting ones is preferred.
+The lower the slowdown ratio, the better response times of jobs across the application.
+It is calculated for each job, however, since workflows may have hundreds of tasks each, it has been decided to average the values across the whole workflow:
+
+\begin{align}
+\overline{Slowdown}=\frac{1}{{|J|}} \cdot \sum_{j \in J} \frac{T_{finish}^j - T_{arrival}^j}{T_{exec}^j}
+.
+\end{align}
+
+
+The next metric is a \emph{Schedule Length Ratio (SLR)}, which represents a normalized makespan.
+This one is often used in scheduling effectiveness comparison across multiple workflows with different graph sizes:
+
+\begin{align}
+SLR=\frac{Makespan}{\sum_{j \in CP} T_{exec}^j}
+.
+\end{align}
+A lower ratio corresponds to a more efficient schedule, with the values closest to 1.0 representing the most optimal ones.
+
+The last metric used in the experimental results evaluation is \emph{Containerization Overhead (CO)}.
+It shows how much time has been cumulatively spent on a task containerization -- workload requests in Kubernetes and pod creation on cluster nodes:
+
+\begin{align}
+CO=\sum_{j \in J} T_{finish}^j - T_{start}^j - T_{exec}^j
+.
+\end{align}
+This metric was introduced to allow further analysis of the differences between task clustering approaches with and without a scheduling plugin. Values of containerization overhead are provided as seconds alike to the makespan metric.

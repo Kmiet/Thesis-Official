@@ -1,6 +1,126 @@
-\subsection{State of the art}\label{s:Introduction:Art} % Containerization and e-Science
+% \subsection{State of the art}\label{s:Introduction:Art} % Containerization and e-Science
 
-\todo{Write State of the art}
+% \todo{Czy tytuł jest adekwatny? Użyć innego (Containerization and e-Science?) czy może bez podrozdziału?}
+
+In recent times, scientific computing has become increasingly important.
+The increase of worldwide gathered data allows to extract even more knowledge.
+However, this often comes at the cost of a higher demand for computing power,
+as the complexity of data processing steps grows.
+To simplify the process, computations are often decomposed into workflows, specifying tasks that can be executed in parallel and dependencies between them.
+
+% Managing the processes of job execution and exposing a common storage is a responsibility of workflow management systems.
+% Each system usually provides a different a different 
+% Pegasus 
+
+
+% Workflows are pipelines comprised of interdependant tasks, required to be executed in a specified order to ensure successful job completion.
+% Additionally, the tasks need to save their results in a common storage.
+% These responsibilities are borne by workflow management systems.
+% An example 
+% Pegasus \cite{b:Pegasus}.
+% Hyperflow is the other workflow management system 
+% The Pegasus system ... cos o Pegasus i Hyperflow.
+
+The workflow applications are often run in computing clusters.
+Nowadays, after the paradigm shift towards virtualization, the primary cluster resources steadily change to virtual machines or containers.
+To setup and monitor such infrastructures, cluster managers come to help, such as Borg developed by Google \cite{b:Borg}.
+Another solution for cluster management is Kubernetes, which handles only containerized workloads \cite{b:Kubernetes-what-is}.
+The suitability of containerized environments for scientific computing purposes has been studied in \cite{b:Enable-HPC-Cloud-K8s} by running HPC applications on various infrastructures, including a Kubernetes cluster spanned over cloud-provided virtual machines.
+Modern scientific workflow management systems, such as Hyperflow, support such containerized infrastructures \cite{b:Hyperflow-K8s}.
+
+
+Container solutions are tightly connected to the topic of cloud computing.
+This comes to the point where a new, container-oriented model of cloud services -- CaaS \cite{b:IBM-CaaS} has been introduced.
+Skyport \cite{b:Skyport} brings in a new approach to use containers for running scientific computations on resources from different providers, including computing clouds.
+Considering both e-Science and cloud, it is worth mentioning that some of the workflow management systems support clouds as their execution environments
+\cite{b:Pegasus}.
+The applicability of the cloud as an execution environment for scientific workloads has been studied in in \cite{b:Magellan} and is mentioned to be dependable on application communication costs.
+
+
+% 
+
+
+
+
+%%%%%%%%% OSTATNIE
+% Nauka -> workflowy -> WMS -> Pegasus -> Hflow -> gdzie odpalane? zazwyczaj klastry ->
+
+% klastry -> wirtualizacja -> kontenery -> Borg -> Kubernetes ->
+
+% -> K8s, kontenery i HPC, cloud -> Enabling K8s ->
+
+% CaaS i Cloud -> Skyport -> nauka na cloudzie i kontenerach ->
+
+% Magellan -> nauka w chmurze ważna sprawa
+%%%%%%%%%
+
+
+%%%%%%%%%
+% Wirtualizacja i kontenery -> klastry -> Borg -> Kubernetes ->
+% -> puszczanie HPC na K8s -> Enable-HPC-Cloud-K8s -> 
+% -> ******
+% -> naukowe rzeczy -> Skyport (Containers, Cloud, Scientific Workflows)
+% -> naukowe rzeczy -> Magellan (Cloud, Science)
+% -> scheduling różne podejścia, HPC -> Mesos?
+%%%%%%%%%
+
+
+%%%%%%%%%
+% Zacznij od e-nauki -> workflowy -> Montage -> WMS -> Pegasus -> Hyperflow
+% ->
+% Wyjście do e-nauki + kontenery -> 
+% nauka -> 
+%%%%%%%%%
+
+
+% \cite{b:Magellan} 22
+% \cite{b:Borg} 26
+% \cite{b:Borg-K8s-predecessor} 15
+% \cite{b:Skyport} 9
+
+% \cite{b:Grid-Workflow-Scheduling-Strategies} 27
+
+% \cite{b:Enable-HPC-Cloud-K8s} 4
+
+% \cite{b:Pegasus} 7 %% Task Clustering
+% \cite{b:Hyperflow} 3
+
+% \cite{b:Kubernetes-what-is} 17
+
+
+
+
+% In the recent times a rise of an interest in a virtualization and containerization technologies had been seen.
+% More and more focus has been put on an idea of software being run in an isolated and from the underlying physical environment.
+% % T
+% Many of that ideas had been also introduced in computing clouds to allow for better service separability and scalability.
+% Additionally it allowed new services to be released, an example being the cloud functions used as the most cost and load adaptable form of computation.
+% New services and systems which were being developed, mostly enterprise applications, started using the container-first approach and it has slowly became a standard for development an software design these days.
+% % More and more people get itere
+
+% The same trends apply to the field of scientific computing.
+% Once strictly restricted to be ran on a massive clusters .
+% Nowadays, more and more of scientific workloads are being slowly transited and adjusted for an execution in the highly virtualized environments, such as computing clouds, be it \emph{virtual machine (VM)} based clusters or ones managed by container orchestrator.
+% With the recently gaining popularity Kubernetes \cite{Kubernetes} platform, a lot of approaches were made to adapt it for a possible scientific clusters management.
+% One of a new workflow management systems that was designed with their engine being run in Kubernetes environment is Hyperflow \cite{HyperFlow}.
+
+
+% %%%
+
+% The problem is what you are going to investigate. The motivation is why. This usually narrows down to: (a) it would be useful or (b) it would fill in an area of knowledge.
+
+% For example:
+
+% Problem: I intend to measure the quantity of C produced when different amounts of B are added to A. This will be done in the presence of varying concentrations of D, E, and mixtures of them.
+
+% Motivation: The production of C is of major importance in agriculture / neurochemistry / liquid crystal manufacture / the growth of slime on the bottoms of ships / teaching children / etc. It is generally understood to come from the action of B on A (key references). However, both D and E are sometimes present and may affect this process.(supporting references). As yet, there has been no systematic investigation of the possible interactions.
+
+% Understanding this may lead to reduction in the use of pesticides / better control of neurological conditions / lower costs for liquid crystal production / a more consistent method of controlling drag on vessels / greater effectiveness in primary education for children who….
+
+%%%
+
+
+
 
 % The state of the art (sometimes cutting edge or leading edge) refers to the highest level of general
 % development, as of a device, technique, or scientific field achieved at a particular time.

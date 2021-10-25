@@ -1,3 +1,100 @@
-\subsection{Problem definition}\label{s:Introduction:Problem}
+\subsection{Objectives}
+\label{s:Introduction:Problem}
 
-\todo{Write a problem statement}
+% \todo{will be?} WSZEDZIE CZAS PRZYSZŁY? do rozważenia
+
+% \todo{Write a problem statement}
+
+%% Investigate, analyze  wyznaczenie, wskazanie, wybór porównanie (choose, pick)
+
+The problem of investigating the topic of scheduling scientific workflows in Kubernetes cluster revolves around the lack of already existing workflow-aware solutions.
+Inspired by the idea of two-step scheduling process from \cite{b:Graphene}, a concept for scheduling DAG-based workloads in Kubernetes will be proposed in this thesis.
+It will utilize well-known algorithms, such as HEFT \cite{b:HEFT} and PEFT \cite{b:PEFT}, for preplanning job execution on cluster computing resources.
+To cover the required workflow management processes, such as task dependency control, a Hyperflow engine \cite{b:Hyperflow} will be used.
+
+Both available execution strategies, with and without task clustering, are being concerned in this work.
+In the process, the focus is being placed on the overall efficiency and finding the solutions most adequate to the considered situation:
+% \emph{Does an additional planning phase help with workflow execution optimization?}
+% \emph{If so, which scheduling algorithm proves to perform the best?}
+% Moreover, both strategies, with and without task clustering enabled, are being concerned in this work.
+% As ... the , challenging the 
+% \emph{How does the two-step scheduling approach affect task clustering performance?}
+% \emph{Compared to the optimal solution, how well does it work in terms of cluster utilization?}
+
+% The investigation process in order to find the optimal appro revolves 
+% With the 
+% are various questions to consider:
+% The investigation process revolves around the 
+
+% To narrow down the scope of this thesis
+
+
+
+\begin{itemize}
+  \item Does an additional planning phase help with workflow execution optimization? If so, which scheduling algorithm proves to perform the best?
+% Do the algorithms have the same relative performance in containerized computing environments?
+  
+  \item How does the two-step scheduling approach affect task clustering performance? Compared to the solution with optimized container CPU requests, how well does it fare?
+\end{itemize}
+
+
+
+To answer these questions, the workload executions are to be analyzed in environments with and without a workflow-aware scheduler.
+The results will then be compared to determine the most adequate approach to scheduling DAG-based jobs in Kubernetes clusters. % will then be
+In this work, the performance of static scheduling algorithms in containerized clusters is also to be measured and verified against the existing results from other environments.
+
+
+
+% For a scheduling 
+% The approaches will be compared with each other to determine the differences through and the best 
+% In each The 
+% The measured
+
+
+%% Kube-sched only or with dag scheduler? How significant are differences?
+
+%% If dag scheduler "wins" then which algorithm performs the best? Czy wyniki z paperów eksperymentalnych zostaną odzwierciedlone i uda się wskazać lepiej działający algorytm pomimo innego srodowiska wykonalnego?
+
+%% Jak rozwiązania radzą sobie w przypadku task clusteringu? Czy uda się zmniejszyc narzut na kontenery przy użyciu dag schedulingu?
+
+%% Jak wygląda kwestia wykorzystania zasobów? Jak wersja z dag-schedulingiem i pusta radzą sobie w porównaniu z wersją, z optymalnie ustawionymi K8s requestami zasobów?
+
+
+
+
+%% -- w tej pracy we will do our best to answear all of the above questions.
+
+%% wył0onić - emerge
+
+
+
+% W celu odpowiedzi na postawione pytania badawcze proponujemy ->
+
+% koncept adaptacji statycznego schedulingu DAGów do K8s
+
+% -> inspirowany dwustopniowym podejsciem z Graphene + cytowanie ->
+
+% -> W tym celu do planowania wykorzystamy HEFT i PEFT ->
+
+% -> zarządanie workflowem przez Hyperflow ->
+
+
+% %%% Osiągniecia pracy
+
+% -> przeanalizowane zostaną wykonania jobów ->
+
+% -> wyniki zostaną zestawione ze sobą -> 
+
+% -> najlepsze rozwiązanie dla każdego z rozważanych przypadków zostanie wskazane
+
+% -> Określony zostanie również relatywne korzyści (zyski) lepszego z rozwiązań (procentowo) ?
+
+
+
+
+% To answer those questions, a concept for scheduling DAG-based workloads in Hyperflow in Kubernetes was proposed and analyzed in terms of efficiency and job completion time minimization.
+% The solution was compared against the kube-scheduler to identify the strengths and weaknesses of each 
+
+% The  The ex nalyze the differences  executions.  of scheduling thro on a Hyperflow engine, compare different approaches with each other and verify, which one tends to be most effective. 
+
+% To answer those questions, we decided to analyze the impact of scheduling on a Hyperflow engine, compare different approaches with each other and verify, which one tends to be most effective.

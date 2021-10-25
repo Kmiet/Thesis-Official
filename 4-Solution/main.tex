@@ -1,39 +1,15 @@
 \thispagestyle{only-cfoot}
-\section{Scheduling in Hyperflow - Proof of Concept}\label{s:SchedHyperflow}
+\section{Scheduling DAG-based workloads in Kubernetes}\label{s:SchedHyperflow}
+% Scheduling workflows in Kubernetes
 
-\todo{Outline of solution chapter}
+% Tutaj, że korzystamy z Hyperflow do workflowów, wymieniamy jakie są opcje i dlaczego pomijamy nadpisywanie kube-schedulera.
 
+% \todo{Outline of solution chapter}
+This chapter presents the concept of a solution to scheduling workflow tasks in Kubernetes clusters.
+Suggestions to enable task clustering with scheduling are included.
 
+\input{4-Solution/4-0-deliberation}
 
-%%%%%%%
-\subsection{Proof of Concept}\label{s:SchedHyperflow:PoC}
+\input{4-Solution/4-1-concept}
 
-\todo{Evaluation with task clustering turned off}
-
-%%% wrzuc zdjecia wykonan bez i z HEFT i opisz przydzial na node'y
-
-
-
-
-%%%%%%%
-\subsection{Scheduling with Task clustering}\label{s:SchedHyperflow:Agglomeration}
-
-\todo{Experiments with task agglomeration}
-
-
-
-\subsubsection{Job agglomeration by operation}
-
-\todo{Agglomeration - current solution}
-
-
-
-\subsubsection{Phase optimization}
-
-\todo{Agglomeration with phase optimization}
-
-
-
-\subsubsection{Summary}
-
-\todo{Agglomeration experiment summary}
+\input{4-Solution/4-2-task-clustering}

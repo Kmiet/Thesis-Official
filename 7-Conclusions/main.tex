@@ -1,4 +1,61 @@
 \thispagestyle{only-cfoot}
 \section{Conclusions and future work}\label{s:Conclusions}
 
-\todo{Sum up the realized goals and describe future objectives}
+% \todo{Sum up the realized goals and describe future objectives}
+
+% This chapter concludes the entirety of this thesis, including an overview
+% of realized objectives, briefly introduces the results of the experiment, and leaves suggestions for directions of future research.
+
+
+In this work, the problem of preplanning an execution of DAG-oriented applications in Kubernetes clusters and its impact on their performance has been investigated.
+The concept of workflow-aware scheduling for Kubernetes has been proposed, along with a solution to task clustering for such containerized workloads.
+Then the effectiveness of each solution has been evaluated through an experimental process with three different scenarios considered.
+
+
+
+%% Tutaj moze bardzo krotkie podsumowanie wynikow
+Workflow execution with two-step scheduling is almost always more efficient than with Kubernetes scheduler alone, especially considering the task clustering solution. 
+In the only scenario contradicting this statement, all evaluated solutions had performed suboptimally due to the low task parallelization.
+All results for the proposed solutions were achieved with schedules computed with HEFT and PEFT algorithms, which restricted the flexibility of resource quotas for pods.
+As this is one of the key features of containerization, the possibility of workflow-aware scheduling without imposing such restrictions should be investigated.
+
+
+With the results from the scenario with usage-based CPU quotas, it has been confirmed that two ways to improve the workflow execution are to lower the containerization overhead or adjust task parallelization with more adequate pod resource requests.
+To further confirm our claims, it would be best to prepare a workflow-aware algorithm, which focuses on CO reduction and allows varying task resource requests, and then investigate its performance.
+
+
+Regarding a schedule efficiency comparison between HEFT and PEFT algorithms for container environments, it seems to be highly application dependent.
+From the experimental result analysis, HEFT is the one that computes in most scenarios a more effective schedule, which contradicts with the results of comparisons made in other non-containerized environments \cite{b:Performance-Comparison-Scheduling-DAG, b:Performance-Analysis-Scheduling-DAG}.
+None of them, however, can be unilaterally selected as a better algorithm.
+
+That marks the completion of all objectives of this thesis.
+Additionally, the data gathered through the span of the experiment and the implementation of the scheduler have been both published online\footnotemark[1]\textsuperscript{,}\footnotemark[2] for further reference and analysis.
+
+\footnotetext[1]{Experimental data: \url{https://github.com/Kmiet/hyperflow-static-scheduling-experiment}}
+\footnotetext[2]{Scheduler implementation: \url{https://github.com/Kmiet/hyperflow-dag-scheduler-plugin}}
+
+\cleardoublepage
+
+% % % % %
+% Objective completion:
+
+% - presents the concept of two-step sched in K8s - befoe analyzed various approaches - and chosen one of them
+% (Hyperflow)
+
+% - a concept for taks clustering for the two-step ched has been proposed
+
+% - solution has been evaluated through a thorough experimental process in computing cloud
+
+% - results have been analyzed in various scenarios and the best approach was revealed.
+% ++
+
+% - the comparison of algorithm effectiveness for containerized environments has been made and results of such have been related to the ones from other environments.
+% ++
+
+% - that concludes completion of all goals.
+% ++
+
+% Future work:
+
+% - algorithms included in this work do not benefit from partial cpuRequests - as the results of optimal cpu scenario are close to the ones of proposed task clustering solution, prepare a workflow-aware scheduling algorithm that would focus on reducing the CO while enabling varying resource requests to get the best out of two worlds
+% ++

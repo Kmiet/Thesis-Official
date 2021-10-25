@@ -1,3 +1,41 @@
-\subsection{Motivation}\label{s:Introduction:Motivation}
+\subsection{Motivation and problem statement}
+\label{s:Introduction:Motivation}
 
-\todo{Write a motivation}
+% Wspominamy o zwiększonej liczbie badań o obliczeniach naukowych na Cloud i kontenerach
+% -> odpowiednio Skyport, Magellan ->
+% Przechodzimy na klastry kontenerowe w cloudzie
+% -> Kubernetes ->
+% zaczynamy o workflowach na Kubernetesie DAGi
+% -> Hyperflow -> execution flow control system -> jak umozliwia wykonanie workflowów w K8s ->
+% wspominamy, że występuje brak faktycznego optymalizacji / planowania DAG podczas schedulingu
+% -> biorąc pod uwagę inne systemy WMS chemy zweryfikować przydatność takiego rozwiązania
+% (info o korzystnym wplywie schedulingu na wykonanie obliczen DAG w WMS? -> Pegasus)
+% i zweryfikować korzyści w nowym środowisku wykonawczym
+
+
+
+As the interest in container computing increases continuously, increasingly more works about scientific computing begin to revolve around containerized execution environments \cite{b:Skyport, b:Hyperflow-K8s}. % \cite{b:Skyport}
+The same phenomenon can be observed in the research area of cloud computing.
+Due to the advantages of on-demand resource availability and scaling capabilities, studies are being made with a focus on e-science in the cloud environment context \cite{b:Magellan}. With this situation ongoing, Kubernetes has become one of the key platforms to run scientific applications for research purposes \cite{b:Enable-HPC-Cloud-K8s}.
+
+An execution of a DAG-based scientific workflow in Kubernetes is not directly supported as Kubernetes provides only cluster management services.
+The default cluster scheduler in Kubernetes considers a single workload to be a separate, containerized application and is only concerned with assigning resources for it to run on. %% do poprawy
+Currently, to ensure a proper workflow parallelization, each task is delegated to a separate container and treated as an independent workload.
+%
+By leveraging the workflow management system engine, the execution flow of DAG-based applications is controlled \cite{b:Pegasus, b:Hyperflow}, ensuring the completion of preceding jobs before running a new one. 
+% However it, still requires the scheduler to manage t
+%
+% Current solution for running such applications is to leverage a workflow management system engine to control the execution flow of the DAG-based application \cite{b:Pegasus, b:Hyperflow}.
+%
+% \cite{b:Hyperflow-k8s-deployment}
+% by monitoring job statuses and allocating only the ready tasks.
+However, in this approach it is not possible to leverage the known DAG structure of the application to plan the whole job execution before runtime in contrast to workflow scheduling solutions.
+% However, this approach does not allow by itself to plan the whole job execution before runtime in contrast to workflow scheduling solutions.
+As running such workloads efficiently is an important concern, for which workflow scheduling is considered as one of the key factors \cite{b:Grid-Workflow-Scheduling-Strategies}, the use of the current approach may now result in their suboptimal execution.
+Introducing a new workflow-aware solution to scheduling DAG-based applications addresses this problem and may provide a possible makespan reduction and better load distribution across available resources.
+% Not only a properly introduced solution ensures the proper workflow execution, taking into account its dependencies, it may also optimize the whole process for shortened makespan or better load distribution across available resources.
+
+Nonetheless, the potential advantages of workflow-aware scheduling solutions for Kubernetes clusters are yet to be confirmed as, to our best knowledge, such scenarios have not been investigated so far. 
+
+%% Cloud -> CaaS -> Kubernetes
+

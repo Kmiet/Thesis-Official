@@ -1,42 +1,44 @@
 \thispagestyle{only-cfoot}
 \section{Evaluation}\label{s:Evaluation}
 
-\todo{Outline of experiment evaluation}
+% \todo{Outline of experiment evaluation}
 
 % robimy 3 zestawienia (Kube-sched, HEFT, PEFT) dla 3 workflow (SoyKB, Montage 0.25, Montage) w każdym subsection
 
-%%%%%%%
-\subsection{Scheduling in Hyperflow}\label{s:Evaluation:HyperflowScheduler}
-
-\todo{Evaluation with task clustering turned off}
-
-
+This chapter presents the evaluation of the proposed concept of scheduling DAG-oriented workloads in Kubernetes and a comparison with the currently available solutions.
+Three different experiment scenarios are thoroughly described and have their results analyzed in detail.
 
 %%%%%%%
-\subsection{Scheduling with Task clustering }\label{s:Evaluation:Agglomeration}
+\subsection{Process description}\label{s:Evaluation:ProcessDescription}
+% \todo{osobna subsection?}
+The evaluation process revolves around three discussed scheduling approaches:
 
-\todo{Experiments with task agglomeration}
-
-
-
-\subsubsection{Job agglomeration by operation}
-
-\todo{Agglomeration - current solution}
-
-
-
-\subsubsection{Job agglomeration by operation - no buffer limit}
-
-\todo{Agglomeration - current solution}
-
-
-
-\subsubsection{Phase optimization}
-
-\todo{Agglomeration with phase optimization}
+\begin{itemize}[topsep=0pt]
+    \item{
+kube-scheduler (without scheduler plugin) -- default solution,
+}
+    \item{
+kube-scheduler with HEFT scheduler plugin,
+}
+    \item{
+kube-scheduler with PEFT scheduler plugin.
+}
+\end{itemize}
+A single scenario consists of ten individual runs of a workflow for every approach for each considered scientific application.
+All cases have been repeated to mitigate the risk of comparing the results obtained from outliers.
+The final results are averaged, then analyzed and compared considering the difference significance with a 95\% confidence level.
 
 
+% Each scenario run was repeated ten times to results were averaged.
+% To verify significance of the results, the metric values were
+% The average values had their difference significance checked with a T test.
 
-\subsection{Summary}
+% negligible
 
-\todo{All experiments summary}
+\input{6-Evaluation/6-1-scheduling}
+
+\input{6-Evaluation/6-2-task-clustering}
+
+\input{6-Evaluation/6-3-resource-optimal}
+
+\input{6-Evaluation/6-4-summary}

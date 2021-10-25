@@ -1,0 +1,127 @@
+%%%%
+\subsection{Environment}\label{s:ExperimentSetup:Environment}
+
+% \todo{AWS, EKS, Eksctl i opis konfiguracja klastra}
+As the prerequisites for this work indicate, the experiment was meant to be conducted in a computing cloud environment. % in Motivation section
+To fulfill them, the AWS platform has been chosen as a target provider of resources to setup and deploy the Kubernetes cluster on.
+This decision was based on both service popularity and our familiarity with it.
+
+%
+
+To setup the Kubernetes cluster in a cloud environment, the EKS (section \ref{s:ProblemDomain:EKS}) service was used.
+The process has been further simplified by leveraging a \emph{eksctl} tool, which enabled the configuration of a cluster through a single file as shown in listing \ref{lst:ex-setup:eksctl-config}.
+In the case of an experiment with larger workflow, to adjust the cluster computing capabilities, the number of nodes in each group configuration had been increased, which changed a vCPU count from 8 to 32 in total.
+
+
+% \todo{obrazek, lub fragment konfiguracji + Hyperflow}
+%%%%%%% Agglo Config 
+\numberwithin{lstlisting}{section}
+\smallskip
+\begin{center}
+\begin{minipage}{0.70\textwidth}
+\lstset{
+    basicstyle=\color{blue}\mdseries\fontsize{8}{9}\selectfont,
+    moredelim=**[il][\color{black}\mdseries{:}\color{black}\mdseries]{:},
+}
+\centering
+\begin{lstlisting}
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: cluster-1
+  region: us-east-1
+
+availabilityZones: ["us-east-1d",  "us-east-1f"]
+
+nodeGroups:
+  - name: hyperflow-engine
+    labels: { nodetype: hfmaster }
+    instanceType: m5.xlarge
+    desiredCapacity: 1
+  - name: hyperflow-worker-1
+    labels: { nodetype: worker1 }
+    instanceType: m5.xlarge
+    desiredCapacity: 1
+  - name: hyperflow-worker-2
+    labels: { nodetype: worker2 }
+    instanceType: m5a.xlarge
+    desiredCapacity: 1
+\end{lstlisting}
+\captionof{lstlisting}{Configuration for eksctl to setup cluster infrastrucutre}
+\label{lst:ex-setup:eksctl-config}
+\end{minipage}
+\end{center}
+%%%%%%%
+
+
+All experiments had been conducted in heterogeneous environments.
+The heterogeneity was introduced by including two separate node groups in a cluster, where each of them comprises of different machine instances.
+Their detailed specifications are presented in the table \cref{tab:ex-setup:instances}.
+This was decided to obtain more natural results from the experiments, as the scheduling algorithms are native to such environments.
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \cline{1-5}
+        \multirow{2}{*}{Instance name} 
+        &
+        \multirow{2}{*}{vCPUs}
+        &
+        \multirow{2}{*}{Memory}
+        &
+        \multicolumn{2}{|c|}{Specification details} \\
+    \cline{4-5}
+        & & & CPU Type & CPU Clock \\
+    \cline{1-5}
+        m5.xlarge & 4 & 16 GiB & Intel Xeon Platinum 8175M & 2.50 GHz \\
+    \cline{1-5}
+        m5a.xlarge & 4 & 16 GiB & AMD EPYC 7571 & 2.55 GHz \\
+    \cline{1-5}
+    \end{tabular}
+    \caption{Instance specifications for machines forming the cluster}
+    \label{tab:ex-setup:instances}
+\end{table}
+
+
+Containerization is a quite flexible method of virtualization regarding resource allocation.
+It allows fractions of a specific resource in a pool to be assigned and utilized by a single container.   
+As the HEFT and PEFT algorithms assume that each task is being executed on a separate processing unit, a static configuration was provided for a resource request for pod creation.
+To unify the resource assignment values across different experiment scenarios, the setup was unified as following:
+
+\begin{itemize}[topsep=0pt]
+  \item{
+\emph{CPU request} was set to 0.85, ensuring there were no more containers than the vCPU on the given node
+};
+  \item{
+\emph{MEM request} was increased to 1GiB, to mitigate possible unexpected issues with high memory usages coming from request limitations.
+}
+\end{itemize}
+% lista requestow CPU request, MEM request
+The results achieved with such a configuration were juxtaposed with results from an \emph{utilization-based} experiment scenario.
+To set the optimal resource requests, separate experiments were run to  measure the task execution times for each available type of machine instance.
+Usages were first averaged for each task in a workflow and then for each operation the task was associated with.
+Then, during the workflow execution, the CPU requests were set to the extracted values, representing an expected optimal resource usage, respectively, for each operation.
+The values used in this configuration are listed in section \ref{s:Evaluation:ResourceOptimal} along with the results.
+
+% \begin{table}[H]
+%     \centering
+%     \begin{tabular}{|c|c|c|c|c|c|}
+%     \cline{1-6}
+%         \multirow{2}{*}{Instance name} 
+%         &
+%         \multicolumn{5}{|c|}{Metrics} \\
+%     \cline{2-6}
+%         & Makespan & Job slowdown & SLR & CO & Critical CO \\
+%     \cline{1-6}
+%         m5.xlarge & x & x & x & x & x \\
+%     \cline{1-6}
+%         m5a.xlarge & x & x & x & x & x \\
+%     \cline{1-6}
+%     \end{tabular}
+%     \caption{Instance specifications of machines forming the cluster}
+%     \label{tab:ex-setup:optimal-usages}
+% \end{table}
+
+

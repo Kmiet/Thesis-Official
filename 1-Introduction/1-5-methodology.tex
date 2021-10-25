@@ -1,11 +1,13 @@
-\subsection{Research methodology}\label{s:Introduction:Methodology}
+\subsection{Research methodology}
+\label{s:Introduction:Methodology}
 
+%% czas przyszły
 % \todo{Describe methodology}
 
-To assess the impact of scheduling dag-oriented workloads in Kubernetes clusters in terms of efficiency and performance
-with analysis and comparison of available approaches,
-a comparative experiment was conducted with a proposed \emph{proof-of-concept (PoC)} scheduler for Hyperflow engine.
-For an evaluation of the introduced solution a few well-known and already established metric were selected, such as:
+To assess the impact of scheduling DAG-based workloads in Kubernetes cluster, an experiment was conducted with a proposed \emph{proof-of-concept (PoC)} scheduler for Hyperflow engine \cite{b:Hyperflow}.
+In the process, three different scheduling approaches have been analyzed in different scenarios.
+They were compared with each other in terms of their workload optimization capabilities, such as reducing job completion time and minimizing container overhead.
+For an evaluation of the produced results, a few well-known and already established metrics were selected, such as:
 
 \begin{itemize}
   \item Makespan,
@@ -13,10 +15,10 @@ For an evaluation of the introduced solution a few well-known and already establ
   \item Job Slowdown.
 \end{itemize}
 
-The data gathered through experimental process came from execution of real-life scientific workflows,
-namely Montage \cite{b:Montage} and SoyKB \cite{b:SoyKB-workflow-url}. % Change soyKB citation?
-Comprising of logs and system metrics it included information about ..... 
+The data gathered through the experimental process came from the execution of real-life scientific workflows,
+namely Montage \cite{b:Montage} and SoyKB \cite{b:SoyKB-PGen}.
+Comprising of logs and system metrics, it included information about resource usage, execution duration, and timestamps from the scheduler, which marked the time of decision for task queue allocation and completion.
+Collected data was later processed\footnotemark[1] and used for execution trace visualization and metric calculation.
 
-and included timestamps for ....... .
-
-Collected data was later processed and used for execution trace visualization and metric calculation.
+\footnotetext[1]{Experimental data: \url{https://github.com/Kmiet/hyperflow-static-scheduling-experiment}}
+% Result of metric comparison were provided with .... \todo{Confidence Indicator}.

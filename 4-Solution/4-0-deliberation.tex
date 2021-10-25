@@ -1,0 +1,72 @@
+%%%%%%%
+\subsection{Analysis of approaches}\label{s:SchedHyperflow:Deliberation}
+
+% Kubernetes scheduler by design does not support static scheduling of workflow tasks for future.
+% Its only responsibility is to select the most applicable node for a pod at a given time, depending on the resource requirements.
+% To study the impact of preplanning the execution of DAG-based workloads in Kubernetes, the concept for a solution to such a mechanism first needs to be proposed.
+
+
+
+% As mentioned in \ref{s:ProblemDomain:Kubernetes:scheduler}, the kube-scheduler does it through the process of filtering and scoring.
+% Although the filtering should leave in the node selected in a plan for job execution, the problem becomes more apparent with the scoring procedure.
+% It may choose different resources for a pod to run on, depending on the current cluster state. 
+
+
+
+%% BEGIN - Deliberation on approaches
+There are two obstacles to overcome in scheduling DAG-based workloads on Kubernetes clusters.
+The first one regards the proper handling of dependencies between the tasks, ensuring their execution in the right order, imposed by the graph structure.
+This is usually one of the liabilities of workflow management systems, and thus can be considered resolved by including their engine in the execution flow.
+%
+The other obstacle is the prioritization of the tasks available to be run.
+In Kubernetes, the default cluster scheduler makes pod allocation decisions in first-come first-served order, based on the time they have been requested to be deployed.
+With the current scheduling approach, it is not possible to change the order of pods to allocate, given the sequence of requested workloads and an expected sequence of prioritized tasks are different.
+There is an option to assign priority to each requested workload definition, this however would only affect the currently scheduled pods or ones yet waiting for an assignment decision.
+Furthermore, this would require a separate entity to be responsible for task ordering, as the priorities would need to be assigned beforehand. 
+
+% Although the filtering should leave in the node selected in a plan for job execution, the problem becomes more apparent with the scoring procedure.
+% It may choose different resources for a pod to run on, depending on the current cluster state.
+
+% As mentioned in section \ref{s:ProblemDomain:Kubernetes:scheduler}, the kube-scheduler does it through the process of filtering and scoring.
+
+
+% Considering all of the mentioned ...
+
+Considering the mentioned issues, to allow workflow-aware scheduling in Kubernetes, it is necessary to first adjust the current solution.
+There are two ways to do so, either create another cluster scheduler and use it instead of kube-scheduler or introduce a new separate entity responsible for task scheduling and run both alongside.
+The difference between these approaches is in their flexibility.
+As mentioned in section \ref{s:ProblemDomain:Kubernetes:scheduler}, the kube-scheduler makes decisions in the process of filtering and scoring, which means the new cluster scheduler would have to be tailored to match this behaviour with both obstacles remaining unsolved.
+On the other hand, an approach with a second scheduler requires only the prioritization process to be covered.
+
+In this work, we decided to further explore the second approach as it better fits the needs of our experimental process with the support for interchangeability of scheduling algorithms. The Hyperflow engine was utilized as an workflow execution supervisor, and thus the first obstacle was removed, leaving only the prioritization as a matter of concern.
+
+% \begin{itemize}
+%   \item{
+% \emph{Create a new cluster scheduler} and use it instead of kube-scheduler. This is the most Kubernetes native approach, however by 
+% };
+%   \item{
+% \emph{Infrastructure as a Service (IaaS)} -- a model where users have to configure and manage the infrastructure by themselves, where the base resources are e.g. virtual machines, data storage and network components.
+% }
+% \end{itemize}
+
+
+
+
+% !While this may not be a problem for dynamic scheduling strategies, it is a real concern for static algorithms, which plans for CPU assignment and task execution order are expected to be followed.
+
+% Drugim jest realizacja przygotowanego planu przy przypisywaniu podów do zasobów.
+% Priorytetyzacja, a nie plan
+
+% Jedną z możliwości jest 
+
+
+% Kube-scheduler opiera się o filtering i sconring, i jego decyzje mogą się znacznie różnić od tych podjętych przez algorytmu planujące.
+
+% Pomimo mozliwości nadpisania schedulera własnym rozwiązaniem, api pozostałoby niezmienne, a to wymagałoby od takiego schedulera przykładowo wzięcia odpowiedzialności WMS. ...
+
+
+% Innym rozwiazaniem jest oddzielenie obu tych  od komponentu schedulera k8s ...
+
+% Takie podejście wydaje się być rozsądniejsze, gdyż jest bardziej elastyczne i pozwala badać różne mechanizmy schedulingu bez potrzeby wprowadania kolejnego schedulera.
+
+% Pod

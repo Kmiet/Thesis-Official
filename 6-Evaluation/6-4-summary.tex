@@ -1,0 +1,27 @@
+%%%%%%%
+\subsection{Summary}
+
+To sum up the results of the whole experiment, the two-step scheduling proves to be a more effective approach than the currently available solution, providing from 3\% to 10\% shorter execution times.
+The only scenario that contradicts this statement is the execution of a workflow with a large number of short tasks.
+When there is no task clustering enabled, all approaches seem to have a problem with workload parallelization.
+This is an edge case of every solution and scheduling yields worse results in such situation.
+
+
+Considering task clustering with two-step scheduling, it has been proven that it helps reducing the container overhead.
+The more tasks in the workflow, the more it can benefit from such reduction in terms of shortening the execution time.
+
+
+\clearpage
+
+Lastly, considering the metrics used in the evaluation process, the SLR metric has not proved as useful as expected.
+Although it often reflects the performance of the executed schedule, it can fail to do so sometimes, likely because task execution times do not include containerization times in contrast to makespan.
+Such relative independence of both values might lead to skewed results.  
+It does not bring that much insight to the final result analysis for such experiments.
+
+% Based on the analysis
+
+% Sched and scenarios:
+
+% - reduction in CO with agglo scheduling confirmed - highly important for large workflows
+
+% - optimal resource scenario - unclear as it seems to be rather sensitive with MIN\_REQ configuration - for the analyzed cases it is not as good as two-step sched 
